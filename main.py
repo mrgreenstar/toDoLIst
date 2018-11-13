@@ -18,7 +18,10 @@ if __name__ == '__main__':
     try:
         # If app was started without args or with arg '-h'
         if len(sys.argv) == 1 or sys.argv[1] == "-h":
-            print("Help option")
+            print("\'show -all\' to show all tasks\n"
+                "\'show -all -done\' to show only done tasks\n"
+                "\'show {id}\' to show task with certain id\n"
+                "\'mad {id}\' to mark task with certain id as done ")
         # To add task
         elif sys.argv[1] == "add" and sys.argv[2] == "-m" and sys.argv[3]:
             print("Add option")
@@ -27,11 +30,13 @@ if __name__ == '__main__':
             session.commit()
         elif sys.argv[1] == "show":
             if sys.argv[2] == "-all":
-                if sys.argv[3] == "mad":
+                # Show only done tasks
+                if sys.argv[len(sys.argv) - 1] == "-done":
                     tasks = session.query(ToDoList).filter(ToDoList.is_done == True).all()
                     for task in tasks:
                         print(task)
                         print("".rjust(50, '-'))
+                # Show all tasks
                 else:
                     tasks = session.query(ToDoList).all()
                     for task in tasks:
@@ -47,11 +52,6 @@ if __name__ == '__main__':
                     print(task)
             elif sys.argv[2].isalpha():
                 print("Wrong id")
-            # Get all done tasks
-            if sys.argv[2] == "-done":
-                tasks = session.query(ToDoList).filter(ToDoList.is_done == 1).all()
-                for task in tasks:
-                    print(task)
         # Mark task as done. MarkAsDone = MAD
         elif sys.argv[1] == "mad":
             task_id = int(sys.argv[2])
