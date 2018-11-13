@@ -19,5 +19,9 @@ class ToDoList(Base):
         self.is_done = False
     
     def __repr__(self):
-        return '<ToDoList(description:{}, created_at: {})>'.format(
+        return "<ToDoList(description:{}, created_at: {})>".format(
             self.description, self.created_at)
+
+    def __str__(self):
+        view = "Created at: {}\nDescriprion: {}\nIs done: {}"
+        return view.format(self.created_at, self.description, self.is_done)
