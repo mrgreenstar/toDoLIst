@@ -14,14 +14,14 @@ if __name__ == '__main__':
     Session = sessionmaker(bind=engine)
     session = Session()
     Base.metadata.create_all(engine)
-    print(sys.argv)
     try:
         # If app was started without args or with arg '-h'
         if len(sys.argv) == 1 or sys.argv[1] == "-h":
             print("\'show -all\' to show all tasks\n"
                 "\'show -all -done\' to show only done tasks\n"
                 "\'show {id}\' to show task with certain id\n"
-                "\'mad {id}\' to mark task with certain id as done ")
+                "\'mad {id}\' to mark task with certain id as done\n"
+                "\'delete {id}\' to delete task with certain id")
         # To add task
         elif sys.argv[1] == "add" and sys.argv[2] == "-m" and sys.argv[3]:
             print("Add option")
@@ -66,7 +66,5 @@ if __name__ == '__main__':
                 task_id = int(sys.argv[2])
                 session.query(ToDoList).filter(ToDoList.id == task_id).delete()
                 session.commit()
-        else:
-            print("other option")
     except IndexError:
         print("Error")
