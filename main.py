@@ -58,6 +58,7 @@ if __name__ == '__main__':
             task = session.query(ToDoList).filter(ToDoList.id == task_id).first()
             task.is_done = True
             session.commit()
+        # To delete task
         elif sys.argv[1] == "delete":
             if len(sys.argv) == 2:
                 print("You have to give an id of task")
