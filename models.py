@@ -23,5 +23,5 @@ class ToDoList(Base):
             self.description, self.created_at)
 
     def __str__(self):
-        view = "Created at: {}\nDescriprion: {}\nIs done: {}"
-        return view.format(self.created_at, self.description, self.is_done)
+        view = "Task id: {}\nCreated at: {}\nDescriprion: {}\nIs done: {}"
+        return view.format(self.id, self.created_at, self.description, self.is_done)

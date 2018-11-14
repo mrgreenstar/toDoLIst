@@ -58,6 +58,13 @@ if __name__ == '__main__':
             task = session.query(ToDoList).filter(ToDoList.id == task_id).first()
             task.is_done = True
             session.commit()
+        elif sys.argv[1] == "delete":
+            if len(sys.argv) == 2:
+                print("You have to give an id of task")
+            else:
+                task_id = int(sys.argv[2])
+                session.query(ToDoList).filter(ToDoList.id == task_id).delete()
+                session.commit()
         else:
             print("other option")
     except IndexError:
